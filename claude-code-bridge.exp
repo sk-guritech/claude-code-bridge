@@ -1,0 +1,61 @@
+#!/usr/bin/expect -f
+# Copyright (c) 2025 Sakaguchi Ryo sakaguchi@sk-techfirm.com
+# Released under the MIT license
+# https://opensource.org/licenses/MIT
+
+# Usage: ./claude-code-bridge.exp [port_number]
+# Example: ./claude-code-bridge.exp 8080
+#
+# Command examples:
+#   echo "send hello" > /dev/tcp/localhost/9999  # Input "hello" and send Enter key
+#   echo "enter" > /dev/tcp/localhost/9999       # Send Enter key only
+#   echo "up" > /dev/tcp/localhost/9999          # Up arrow key
+#   echo "down" > /dev/tcp/localhost/9999        # Down arrow key
+
+# Default settings
+set port 9999
+set output_file "/tmp/claude-code-terminal.log"
+
+# Argument processing
+if {$argc > 0} {
+    set port [lindex $argv 0]
+}
+
+# Launch claude
+spawn claude
+set timeout -1
+
+# Log file configuration
+log_file -noappend $output_file
+
+# TCP Socket server
+socket -server accept_connection $port
+
+proc accept_connection {sock addr port} {
+    fconfigure $sock -blocking 0 -buffering line
+    fileevent $sock readable [list handle_socket_input $sock]
+}
+
+proc handle_socket_input {sock} {
+    if {[catch {gets $sock line} result]} {
+        close $sock
+        return
+    }
+
+    if {$result >= 0 && $line != ""} {
+        if {[string match "send *" $line]} {
+            set cmd [string range $line 5 end]
+            send -- $cmd
+            sleep 0.01
+            send -- "\r"
+        } elseif {$line == "enter"} {
+            send -- "\r"
+        } elseif {$line == "up"} {
+            send -- "\033\[A"
+        } elseif {$line == "down"} {
+            send -- "\033\[B"
+        }
+    }
+}
+
+interact
