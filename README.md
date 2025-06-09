@@ -70,10 +70,10 @@ echo "send hello world" > /dev/tcp/localhost/9999
 # Send Enter key only
 echo "enter" > /dev/tcp/localhost/9999
 
-# Up arrow key (navigate command history backward)
+# Up arrow key
 echo "up" > /dev/tcp/localhost/9999
 
-# Down arrow key (navigate command history forward)
+# Down arrow key
 echo "down" > /dev/tcp/localhost/9999
 ```
 
