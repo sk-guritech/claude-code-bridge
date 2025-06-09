@@ -83,12 +83,6 @@ echo "down" > /dev/tcp/localhost/9999
 
 [MIT License](LICENSE)
 
-## 参考資料
-
-- [Expect公式ドキュメント](https://www.tcl.tk/man/expect5.31/expect.1.html)
-- [Claude Code Documentation](https://www.anthropic.com/)
-- [関連Qiita記事](YOUR_QIITA_ARTICLE_URL)
-
 ## Author
 
 **Sakaguchi Ryo**  
