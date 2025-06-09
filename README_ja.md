@@ -70,10 +70,10 @@ echo "send hello world" > /dev/tcp/localhost/9999
 # Enterキーのみを送信
 echo "enter" > /dev/tcp/localhost/9999
 
-# 上矢印キー（コマンド履歴を遡る）
+# 上矢印キー
 echo "up" > /dev/tcp/localhost/9999
 
-# 下矢印キー（コマンド履歴を進める）
+# 下矢印キー
 echo "down" > /dev/tcp/localhost/9999
 ```
 
