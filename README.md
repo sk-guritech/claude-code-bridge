@@ -34,7 +34,7 @@ This script solves the following challenges when using Claude Code in devcontain
 
 ```bash
 # Clone the repository
-git clone https://github.com/YOUR_USERNAME/claude-code-bridge.git
+git clone https://github.com/sk-guritech/claude-code-bridge.git
 cd claude-code-bridge
 
 # Grant execution permissions
